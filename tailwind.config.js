@@ -8,17 +8,23 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#f8f9fa',
-          100: '#e9ecef',
-          200: '#dee2e6',
-          300: '#ced4da',
-          400: '#adb5bd',
-          500: '#6c757d',
-          600: '#495057',
-          700: '#343a40',
-          800: '#212529',
-          900: '#0d0e10',
+          950: '#010804',
+          900: '#030f0a',
+          800: '#051a0f',
+          700: '#082b18',
+          600: '#0c3d22',
+          500: '#00d68f',
+          400: '#00ff9d',
+          300: '#5affbf',
+          200: '#9affda',
+          100: '#ccfff0',
+          50:  '#f0fff8',
         },
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        heading: ['"Space Grotesk"', 'ui-sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       screens: {
         xs: '375px',

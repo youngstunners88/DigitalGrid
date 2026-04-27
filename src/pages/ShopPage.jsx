@@ -1,56 +1,62 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import products from '../data/products.json'
 import ProductCard from '../components/ProductCard'
 
+const CATEGORIES = [
+  { value: 'all',         label: 'All Products' },
+  { value: 'laptop',      label: 'Laptops' },
+  { value: 'desktop',     label: 'Desktops' },
+  { value: 'accessories', label: 'Accessories' },
+]
+
 function ShopPage() {
   const [category, setCategory] = useState('all')
-
-  const categories = [
-    { value: 'all', label: 'All Products' },
-    { value: 'laptop', label: 'Laptops' },
-    { value: 'desktop', label: 'Desktops' },
-    { value: 'accessories', label: 'Accessories' },
-  ]
 
   const filtered = category === 'all'
     ? products
     : products.filter(p => p.category === category)
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-8">Shop</h1>
+    <div className="container mx-auto px-4 py-10">
+      {/* Header */}
+      <div className="mb-10">
+        <p className="text-brand-400 font-mono text-sm uppercase tracking-widest mb-2">Browse</p>
+        <h1 className="font-heading font-bold text-5xl text-white">Shop</h1>
+      </div>
 
-      <div className="mb-8">
-        <div className="flex gap-2 flex-wrap">
-          {categories.map(cat => (
-            <button
-              key={cat.value}
-              onClick={() => setCategory(cat.value)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                category === cat.value
-                  ? 'bg-brand-900 text-white'
-                  : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
-              }`}
-            >
-              {cat.label}
-            </button>
+      {/* Filter pills */}
+      <div className="flex gap-2 flex-wrap mb-10">
+        {CATEGORIES.map(cat => (
+          <button
+            key={cat.value}
+            onClick={() => setCategory(cat.value)}
+            className={`px-5 py-2 rounded-lg text-sm font-medium font-heading transition-all duration-200 ${
+              category === cat.value
+                ? 'bg-brand-500 text-brand-900 shadow-glow-sm'
+                : 'glass-card text-brand-300 hover:text-white hover:border-brand-500/40'
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+        <span className="ml-auto text-brand-400 text-sm font-mono self-center">
+          {filtered.length} device{filtered.length !== 1 ? 's' : ''}
+        </span>
+      </div>
+
+      {/* Grid */}
+      {filtered.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {filtered.map(product => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No products found in this category.</p>
+      ) : (
+        <div className="text-center py-20">
+          <p className="text-brand-300 mb-4">No products found in this category.</p>
           <button
             onClick={() => setCategory('all')}
-            className="text-brand-900 hover:underline font-semibold"
+            className="text-brand-400 hover:text-brand-300 font-semibold transition-colors"
           >
             View all products
           </button>

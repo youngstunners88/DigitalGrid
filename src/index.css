@@ -2,26 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply antialiased;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-brand-900 text-white font-sans;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #00d68f;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background: rgba(0, 214, 143, 0.3);
+    color: #fff;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer utilities {
+  /* Animated grid background — CSS only, no JS */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0, 214, 143, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 214, 143, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .grid-bg-animated {
+    background-image:
+      linear-gradient(rgba(0, 214, 143, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 214, 143, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-shift 30s linear infinite;
+  }
+
+  /* Ambient radial glow overlay */
+  .radial-glow-tl {
+    background: radial-gradient(ellipse 60% 50% at 10% 20%, rgba(0, 214, 143, 0.12) 0%, transparent 70%);
+  }
+
+  .radial-glow-br {
+    background: radial-gradient(ellipse 60% 50% at 90% 80%, rgba(0, 214, 143, 0.10) 0%, transparent 70%);
+  }
+
+  /* Glassmorphism cards */
+  .glass-card {
+    background: rgba(5, 26, 15, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 214, 143, 0.15);
+  }
+
+  .glass-card-hover {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .glass-card-hover:hover {
+    border-color: rgba(0, 214, 143, 0.4);
+    box-shadow: 0 0 30px rgba(0, 214, 143, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glow shadows */
+  .shadow-glow-sm { box-shadow: 0 0 10px rgba(0, 214, 143, 0.25); }
+  .shadow-glow    { box-shadow: 0 0 20px rgba(0, 214, 143, 0.35); }
+  .shadow-glow-lg { box-shadow: 0 0 40px rgba(0, 214, 143, 0.50); }
+
+  /* Glowing text */
+  .text-glow {
+    text-shadow: 0 0 30px rgba(0, 214, 143, 0.6), 0 0 60px rgba(0, 214, 143, 0.2);
+  }
+
+  /* Page-transition animation class */
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #00ff9d 0%, #00d68f 50%, #5affbf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Spec table row */
+  .spec-row {
+    border-left: 2px solid rgba(0, 214, 143, 0.4);
+    padding-left: 12px;
+  }
 }
 
-body {
-  @apply bg-white text-gray-900;
+/* ───────── Keyframes ───────── */
+@keyframes grid-shift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
 }
 
-button {
-  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500;
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 214, 143, 0.3); }
+  50%       { box-shadow: 0 0 35px rgba(0, 214, 143, 0.65), 0 0 70px rgba(0, 214, 143, 0.2); }
 }
 
-a {
-  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500;
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-img {
-  @apply max-w-full h-auto;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
 }
