@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Shield, Zap, Globe, Users } from 'lucide-react'
+import { ArrowRight, Shield, Zap, Globe, Users, ShoppingCart } from 'lucide-react'
 import products from '../data/products.json'
 import ProductCard from '../components/ProductCard'
 

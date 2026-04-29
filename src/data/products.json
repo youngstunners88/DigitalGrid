@@ -1,301 +1,200 @@
 [
   {
-    "id": "dell-xps-13",
-    "name": "Dell XPS 13",
-    "category": "laptop",
-    "price": 4999,
-    "specs": {
-      "processor": "Intel Core i5-1235U",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "13.3\" FHD"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=500&fit=crop",
-    "description": "Ultraportable with stunning display. Perfect for students and remote workers."
-  },
-  {
-    "id": "lenovo-thinkpad-x1",
-    "name": "Lenovo ThinkPad X1 Carbon",
-    "category": "laptop",
-    "price": 5499,
-    "specs": {
-      "processor": "Intel Core i7-1365U",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "display": "14\" OLED"
-    },
-    "condition": "Like New",
-    "image": "https://images.unsplash.com/photo-1588872657840-90a53d2b04b1?w=500&h=500&fit=crop",
-    "description": "Business-class build quality. OLED display for stunning visuals."
-  },
-  {
-    "id": "hp-pavilion-14",
-    "name": "HP Pavilion 14",
-    "category": "laptop",
-    "price": 3499,
-    "specs": {
-      "processor": "AMD Ryzen 5 5500U",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "display": "14\" FHD"
-    },
-    "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
-    "description": "Great value for everyday computing. Solid battery life."
-  },
-  {
-    "id": "asus-vivobook-15",
-    "name": "ASUS VivoBook 15",
-    "category": "laptop",
-    "price": 2999,
-    "specs": {
-      "processor": "Intel Core i3-1115G4",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "display": "15.6\" FHD"
-    },
-    "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1545521521-83f3f8b24cdd?w=500&h=500&fit=crop",
-    "description": "Budget-friendly with large screen. Perfect for productivity."
-  },
-  {
-    "id": "macbook-air-m1",
-    "name": "MacBook Air M1",
-    "category": "laptop",
-    "price": 6499,
-    "specs": {
-      "processor": "Apple M1",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "display": "13.3\" Retina"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
-    "description": "Premium laptop with exceptional performance. Great for creative work."
-  },
-  {
-    "id": "acer-swift-3",
-    "name": "Acer Swift 3",
-    "category": "laptop",
-    "price": 3799,
-    "specs": {
-      "processor": "Intel Core i5-1135G7",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "14\" IPS"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1518227190667-ab7cecad1ea1?w=500&h=500&fit=crop",
-    "description": "Fast performance with great portability. Excellent build quality."
-  },
-  {
-    "id": "msi-gf63-thin",
-    "name": "MSI GF63 Thin",
-    "category": "laptop",
-    "price": 5299,
-    "specs": {
-      "processor": "Intel Core i7-10750H",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "display": "15.6\" 144Hz"
-    },
-    "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
-    "description": "Gaming laptop with high refresh rate. Great for gaming and content creation."
-  },
-  {
-    "id": "dell-inspiron-15",
-    "name": "Dell Inspiron 15",
-    "category": "laptop",
-    "price": 2499,
-    "specs": {
-      "processor": "Intel Core i3-1005G1",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "display": "15.6\" FHD"
-    },
-    "condition": "Fair",
-    "image": "https://images.unsplash.com/photo-1588872657840-90a53d2b04b1?w=500&h=500&fit=crop",
-    "description": "Budget option for basic computing. Good display size."
-  },
-  {
-    "id": "hp-envy-13",
-    "name": "HP Envy 13",
+    "id": "dell-5300-2in1",
+    "name": "DELL Latitude 5300 2-in-1",
+    "handle": "dell-5300-2in1",
     "category": "laptop",
     "price": 4299,
-    "specs": {
-      "processor": "Intel Core i5-1135G7",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "13.3\" OLED"
-    },
+    "specs": { "processor": "Intel Core i5-8365U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "13.3\" FHD Touch" },
     "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=500&fit=crop",
-    "description": "Premium design with beautiful OLED display. Great for visual tasks."
+    "image": "https://m.media-amazon.com/images/I/71I66kTgKtL._AC_SL1000_.jpg",
+    "description": "Business 2-in-1 convertible with touchscreen. Folds 360° into tablet mode."
   },
   {
-    "id": "lenovo-yoga-7i",
-    "name": "Lenovo Yoga 7i",
+    "id": "dell-e3400",
+    "name": "DELL Latitude E3400",
+    "handle": "dell-e3400",
     "category": "laptop",
-    "price": 4799,
-    "specs": {
-      "processor": "Intel Core i5-1240P",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "14\" 2.8K"
-    },
-    "condition": "Like New",
-    "image": "https://images.unsplash.com/photo-1517225807642-cbf8e65e2d49?w=500&h=500&fit=crop",
-    "description": "2-in-1 convertible. Great for versatility and presentations."
-  },
-  {
-    "id": "samsung-galaxy-book",
-    "name": "Samsung Galaxy Book Pro",
-    "category": "laptop",
-    "price": 5199,
-    "specs": {
-      "processor": "Intel Core i7-1195G7",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "13.3\" AMOLED"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
-    "description": "Lightweight with stunning AMOLED display. Premium feel."
-  },
-  {
-    "id": "asus-tuf-gaming",
-    "name": "ASUS TUF Gaming F15",
-    "category": "laptop",
-    "price": 5699,
-    "specs": {
-      "processor": "Intel Core i7-11800H",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "display": "15.6\" 144Hz"
-    },
-    "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
-    "description": "Durable gaming laptop. Great for gaming and professional work."
-  },
-  {
-    "id": "razer-book-13",
-    "name": "Razer Book 13",
-    "category": "laptop",
-    "price": 4599,
-    "specs": {
-      "processor": "Intel Core i5-1135G7",
-      "ram": "8GB",
-      "storage": "512GB SSD",
-      "display": "13.3\" FHD"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=500&fit=crop",
-    "description": "Sleek design with precision. Perfect for professionals."
-  },
-  {
-    "id": "dell-optiplex-3080",
-    "name": "Dell OptiPlex 3080 MT",
-    "category": "desktop",
-    "price": 1999,
-    "specs": {
-      "processor": "Intel Core i3-10100",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "graphics": "Intel UHD"
-    },
-    "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "Reliable office desktop. Compact and efficient."
-  },
-  {
-    "id": "hp-elitedesk-800",
-    "name": "HP EliteDesk 800 G6",
-    "category": "desktop",
     "price": 2499,
-    "specs": {
-      "processor": "Intel Core i5-10500",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "graphics": "Intel UHD 630"
-    },
-    "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "Professional-grade desktop. Great for demanding tasks."
+    "specs": { "processor": "Intel Core i5-8250U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "14\" HD" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/616jxxM4VLL._AC_SL1000_.jpg",
+    "description": "Reliable workhorse laptop. Ideal for students and everyday productivity."
   },
   {
-    "id": "lenovo-thinkcentre",
-    "name": "Lenovo ThinkCentre M90",
+    "id": "dell-e5400",
+    "name": "DELL Latitude E5400",
+    "handle": "dell-e5400",
+    "category": "laptop",
+    "price": 3199,
+    "specs": { "processor": "Intel Core i5-8350U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "14\" FHD" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/61PkGRSw05L._AC_SL1000_.jpg",
+    "description": "Mid-range business laptop with long battery life and solid build quality."
+  },
+  {
+    "id": "dell-e7390-2in1",
+    "name": "DELL Latitude E7390 2-in-1",
+    "handle": "dell-e7390-2in1",
+    "category": "laptop",
+    "price": 5499,
+    "specs": { "processor": "Intel Core i7-8650U", "ram": "16GB DDR4", "storage": "512GB SSD", "display": "13.3\" FHD Touch" },
+    "condition": "Like New",
+    "image": "https://m.media-amazon.com/images/I/41QytvUj8eL._AC_SL1000_.jpg",
+    "description": "Premium ultra-thin 2-in-1 with vPro. Top-tier business performance."
+  },
+  {
+    "id": "dell-optiplex-3050",
+    "name": "Dell OptiPlex 3050 USFF",
+    "handle": "dell-optiplex-3050",
     "category": "desktop",
     "price": 2299,
-    "specs": {
-      "processor": "Intel Core i5-9400",
-      "ram": "8GB",
-      "storage": "256GB SSD",
-      "graphics": "Intel UHD 630"
-    },
+    "specs": { "processor": "Intel Core i5-7500T", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "N/A (Monitor Required)" },
     "condition": "Good",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "Solid office machine. Quiet and reliable."
+    "image": "https://m.media-amazon.com/images/I/61RcnCuHbmL._AC_SL1000_.jpg",
+    "description": "Ultra small form factor desktop. Perfect for office or home desk setups."
   },
   {
-    "id": "asus-vivopc",
-    "name": "ASUS VivoPC M90",
-    "category": "desktop",
-    "price": 3199,
-    "specs": {
-      "processor": "Intel Core i7-10700",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "graphics": "Intel UHD 630"
-    },
+    "id": "dell-xps",
+    "name": "DELL XPS 13 Laptop",
+    "handle": "dell-xps",
+    "category": "laptop",
+    "price": 7999,
+    "specs": { "processor": "Intel Core i7-1165G7", "ram": "16GB LPDDR4x", "storage": "512GB NVMe SSD", "display": "13.4\" FHD+" },
     "condition": "Like New",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "Compact powerful desktop. Great for creative professionals."
+    "image": "https://m.media-amazon.com/images/I/71Nr-5xBFvL._AC_SL1000_.jpg",
+    "description": "Dell's flagship ultrabook. Stunning InfinityEdge display, premium all-around."
   },
   {
-    "id": "acer-aspirepc",
-    "name": "Acer Aspire XC-1660",
-    "category": "desktop",
-    "price": 3699,
-    "specs": {
-      "processor": "Intel Core i7-11700",
-      "ram": "16GB",
-      "storage": "512GB SSD",
-      "graphics": "RTX 3060"
-    },
+    "id": "hp-430-g5",
+    "name": "HP ProBook 430 G5",
+    "handle": "hp-430-g5",
+    "category": "laptop",
+    "price": 3499,
+    "specs": { "processor": "Intel Core i5-8250U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "13.3\" FHD" },
     "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "Gaming-capable desktop. Great value for the specs."
+    "image": "https://m.media-amazon.com/images/I/614XejkqwPL._AC_SL1000_.jpg",
+    "description": "Compact professional laptop with military-grade durability and security features."
   },
   {
-    "id": "msi-trident",
-    "name": "MSI Trident 3 Arctic",
+    "id": "hp-800-g4-sff",
+    "name": "HP EliteDesk 800 G4 SFF",
+    "handle": "hp-800-g4-sff",
     "category": "desktop",
-    "price": 4199,
-    "specs": {
-      "processor": "Intel Core i7-11700K",
-      "ram": "16GB",
-      "storage": "1TB SSD",
-      "graphics": "RTX 3070"
-    },
+    "price": 3299,
+    "specs": { "processor": "Intel Core i7-8700", "ram": "16GB DDR4", "storage": "512GB SSD", "display": "N/A (Monitor Required)" },
     "condition": "Excellent",
-    "image": "https://images.unsplash.com/photo-1621905167918-48416bd8575a?w=500&h=500&fit=crop",
-    "description": "High-performance gaming desktop. Excellent cooling."
+    "image": "https://m.media-amazon.com/images/I/61nFu6D0t4S._AC_SL1000_.jpg",
+    "description": "Small form factor powerhouse. HP's premium business desktop with enterprise features."
   },
   {
-    "id": "generic-tablet",
-    "name": "Refurbished Tablet Bundle",
-    "category": "accessories",
-    "price": 1499,
-    "specs": {
-      "type": "Mixed Bundle",
-      "included": "Various tablets and accessories",
-      "condition": "Fair to Good"
-    },
-    "condition": "Fair",
-    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=500&fit=crop",
-    "description": "Bundle of various refurbished tablets. Great for casual use."
+    "id": "hp-830-g6",
+    "name": "HP EliteBook 830 G6",
+    "handle": "hp-830-g6",
+    "category": "laptop",
+    "price": 4999,
+    "specs": { "processor": "Intel Core i5-8365U", "ram": "16GB DDR4", "storage": "512GB SSD", "display": "13.3\" FHD" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/61zOY7dIkIL._AC_SL1000_.jpg",
+    "description": "HP's top-tier business laptop. Durable, secure, and built for professionals."
+  },
+  {
+    "id": "hp-445r",
+    "name": "HP ProBook 445R G6",
+    "handle": "hp-445r",
+    "category": "laptop",
+    "price": 3799,
+    "specs": { "processor": "AMD Ryzen 5 3500U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "14\" FHD" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/71jc7qEZOUL._AC_SL1000_.jpg",
+    "description": "AMD-powered value laptop with great performance per rand."
+  },
+  {
+    "id": "hp-probook-650-g2",
+    "name": "HP ProBook 650 G2",
+    "handle": "hp-probook-650-g2",
+    "category": "laptop",
+    "price": 2999,
+    "specs": { "processor": "Intel Core i5-6300U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "15.6\" FHD" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/51ZIeeqsZ3L._AC_SL1000_.jpg",
+    "description": "Large-screen business laptop. Great for productivity and multimedia."
+  },
+  {
+    "id": "hp-probook-650-g4",
+    "name": "HP ProBook 650 G4",
+    "handle": "hp-probook-650-g4",
+    "category": "laptop",
+    "price": 3599,
+    "specs": { "processor": "Intel Core i5-8350U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "15.6\" FHD" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/616NWwVptUL._AC_SL1000_.jpg",
+    "description": "Updated 8th-gen ProBook 650. Faster processor, same reliable build."
+  },
+  {
+    "id": "lenovo-m81-desktop",
+    "name": "Lenovo ThinkCentre M81",
+    "handle": "lenovo-m81-desktop",
+    "category": "desktop",
+    "price": 1799,
+    "specs": { "processor": "Intel Core i5-2400", "ram": "8GB DDR3", "storage": "256GB SSD", "display": "N/A (Monitor Required)" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/517eMIp1DHL._AC_SL1000_.jpg",
+    "description": "Budget desktop for basic office work. Quiet, compact, and energy efficient."
+  },
+  {
+    "id": "lenovo-m91-desktop",
+    "name": "Lenovo ThinkCentre M91",
+    "handle": "lenovo-m91-desktop",
+    "category": "desktop",
+    "price": 1999,
+    "specs": { "processor": "Intel Core i5-2500", "ram": "8GB DDR3", "storage": "256GB SSD", "display": "N/A (Monitor Required)" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/61vYEwQJ0TL._AC_SL1000_.jpg",
+    "description": "Slightly newer ThinkCentre with improved processing power for everyday tasks."
+  },
+  {
+    "id": "lenovo-t470s",
+    "name": "Lenovo ThinkPad T470S",
+    "handle": "lenovo-t470s",
+    "category": "laptop",
+    "price": 4499,
+    "specs": { "processor": "Intel Core i7-7600U", "ram": "16GB DDR4", "storage": "512GB SSD", "display": "14\" FHD IPS" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/61FBPGBeVUL._AC_SL1000_.jpg",
+    "description": "Slim ThinkPad with exceptional keyboard and enterprise-grade security."
+  },
+  {
+    "id": "lenovo-thinkcentre-m700",
+    "name": "Lenovo ThinkCentre M700",
+    "handle": "lenovo-thinkcentre-m700",
+    "category": "desktop",
+    "price": 2199,
+    "specs": { "processor": "Intel Core i5-6400T", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "N/A (Monitor Required)" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/61h3QrQpKwL._AC_SL1000_.jpg",
+    "description": "6th-gen ThinkCentre tower. Compact, quiet desktop with great upgrade potential."
+  },
+  {
+    "id": "lenovo-thinkpad-l440",
+    "name": "Lenovo ThinkPad L440",
+    "handle": "lenovo-thinkpad-l440",
+    "category": "laptop",
+    "price": 2799,
+    "specs": { "processor": "Intel Core i5-4210M", "ram": "8GB DDR3", "storage": "256GB SSD", "display": "14\" HD" },
+    "condition": "Good",
+    "image": "https://m.media-amazon.com/images/I/71zImBmEYyL._AC_SL1000_.jpg",
+    "description": "Legendary ThinkPad keyboard on a budget. Tough build, great typing experience."
+  },
+  {
+    "id": "lenovo-thinkpad-l470",
+    "name": "Lenovo ThinkPad L470",
+    "handle": "lenovo-thinkpad-l470",
+    "category": "laptop",
+    "price": 3299,
+    "specs": { "processor": "Intel Core i5-7200U", "ram": "8GB DDR4", "storage": "256GB SSD", "display": "14\" FHD" },
+    "condition": "Excellent",
+    "image": "https://m.media-amazon.com/images/I/61T2hfQg29L._AC_SL1000_.jpg",
+    "description": "7th-gen L-series ThinkPad. Improved FHD display and modern performance."
   }
 ]
