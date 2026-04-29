@@ -1,21 +1,24 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { ArrowLeft, Check, ShoppingCart } from 'lucide-react'
+import { ArrowLeft, Check, ShoppingCart, Heart } from 'lucide-react'
+import ProductCarousel from '../components/ProductCarousel'
 import products from '../data/products.json'
 import { useCart } from '../context/CartContext'
-import { conditionBadgeClasses } from '../utils/conditionBadge'
+import { useWishlist } from '../context/WishlistContext'
 
 function ProductPage() {
   const { handle } = useParams()
   const { addItem } = useCart()
+  const { isSaved, addItem: addToWishlist, removeItem: removeFromWishlist } = useWishlist()
   const [added, setAdded] = useState(false)
   const product = products.find(p => p.id === handle)
+  const saved = isSaved(product?.id)
 
   if (!product) {
     return (
       <div className="container mx-auto px-4 text-center py-24">
-        <h1 className="font-heading font-bold text-2xl text-white mb-4">Product not found</h1>
-        <Link to="/shop" className="text-brand-400 hover:text-brand-300 font-semibold transition-colors">
+        <h1 className="font-heading font-bold text-2xl text-gray-900 mb-4">Product not found</h1>
+        <Link to="/shop" className="text-brand-600 hover:text-brand-700 font-semibold transition-colors">
           Back to shop
         </Link>
       </div>
@@ -33,102 +36,117 @@ function ProductPage() {
     setTimeout(() => setAdded(false), 2000)
   }
 
+  const handleWishlist = () => {
+    if (saved) {
+      removeFromWishlist(product.id)
+    } else {
+      addToWishlist({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+      })
+    }
+  }
+
   return (
-    <div className="container mx-auto px-4 py-10">
-      <Link
-        to="/shop"
-        className="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors mb-10 text-sm"
-      >
-        <ArrowLeft size={16} />
-        Back to shop
-      </Link>
+    <div className="min-h-screen bg-white page-enter">
+      <div className="container mx-auto px-4 py-10">
+        <Link to="/shop" className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 transition-colors mb-10 text-sm font-semibold">
+          <ArrowLeft size={16} />
+          Back to shop
+        </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* ── Image ── */}
-        <div className="aspect-square glass-card rounded-xl overflow-hidden">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover"
-            decoding="async"
-          />
-        </div>
-
-        {/* ── Details ── */}
-        <div>
-          {/* Category + Condition */}
-          <div className="flex items-center gap-3 mb-4 flex-wrap">
-            <span className="text-brand-400 text-xs font-mono uppercase tracking-widest">
-              {product.category}
-            </span>
-            <span className={`text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full ${conditionBadgeClasses(product.condition)}`}>
-              {product.condition}
-            </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Image carousel */}
+          <div>
+            <ProductCarousel images={[product.image]} productName={product.name} />
           </div>
 
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl text-white leading-tight mb-4">
-            {product.name}
-          </h1>
-          <p className="text-brand-300 text-base leading-relaxed mb-10">{product.description}</p>
-
-          {/* ── Tech Spec Panel ── */}
-          <div className="glass-card rounded-xl p-6 mb-8">
-            <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-5 rounded-sm bg-brand-500" />
-              <h2 className="font-heading font-semibold text-white">Technical Specifications</h2>
+          {/* Details */}
+          <div>
+            <div className="mb-6">
+              <span className="badge-brand mb-3 inline-block">{product.category.toUpperCase()}</span>
+              <h1 className="font-heading font-bold text-4xl sm:text-5xl text-gray-900 leading-tight">
+                {product.name}
+              </h1>
             </div>
-            <dl className="space-y-3">
-              {Object.entries(product.specs).map(([key, value], i) => (
-                <div
-                  key={key}
-                  className={`grid grid-cols-2 gap-4 py-2.5 px-3 rounded-lg spec-row ${
-                    i % 2 === 0 ? 'bg-brand-500/5' : ''
+
+            <p className="text-gray-700 text-base leading-relaxed mb-10">{product.description}</p>
+
+            {/* Specs table */}
+            <div className="card-flat p-6 mb-8 border-2 border-brand-300/50">
+              <h2 className="font-heading font-bold text-lg text-gray-900 mb-5 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-brand-500" />
+                Technical Specifications
+              </h2>
+              <table className="w-full text-sm">
+                <tbody className="divide-y divide-gray-200">
+                  {Object.entries(product.specs).map(([key, value]) => (
+                    <tr key={key}>
+                      <td className="py-3 pr-4 font-mono text-brand-600 uppercase text-xs font-semibold">
+                        {key}
+                      </td>
+                      <td className="py-3 text-right text-gray-900 font-semibold">
+                        {value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Condition + Price */}
+            <div className="mb-8">
+              <p className="text-sm text-gray-600 mb-2">Condition</p>
+              <span className="inline-block badge-outline mb-4">
+                {product.condition}
+              </span>
+            </div>
+
+            <div className="card-flat p-6 mb-6 border-2 border-brand-500/50">
+              <p className="font-heading font-bold text-5xl text-brand-600 mb-4">
+                R{product.price.toLocaleString('en-ZA')}
+              </p>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={handleAddToCart}
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-lg font-heading font-bold text-lg transition-all ${
+                    added
+                      ? 'bg-emerald-500 text-white'
+                      : 'bg-brand-500 text-white hover:bg-brand-600 shadow-lg'
                   }`}
                 >
-                  <dt className="text-brand-400 text-xs font-mono uppercase tracking-wider self-center capitalize">
-                    {key}
-                  </dt>
-                  <dd className="text-white font-mono text-sm font-semibold text-right">
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+                  {added ? (
+                    <>
+                      <Check size={22} />
+                      Added
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={22} />
+                      Add to Cart
+                    </>
+                  )}
+                </button>
 
-          {/* ── Price + CTA ── */}
-          <div className="glass-card rounded-xl p-6">
-            <div className="flex items-baseline gap-2 mb-6">
-              <span className="font-heading font-bold text-5xl text-brand-400 text-glow">
-                R{product.price.toLocaleString('en-ZA')}
-              </span>
-              <span className="text-brand-400 text-sm font-mono">ZAR</span>
+                <button
+                  onClick={handleWishlist}
+                  className={`px-6 py-4 rounded-lg font-bold transition-colors border-2 ${
+                    saved
+                      ? 'bg-brand-50 border-brand-500 text-brand-600'
+                      : 'bg-white border-gray-200 text-gray-700 hover:border-brand-500'
+                  }`}
+                  aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+                >
+                  <Heart size={22} fill={saved ? 'currentColor' : 'none'} />
+                </button>
+              </div>
+
+              <p className="text-xs text-gray-500 text-center mt-4">
+                Free delivery · Secure checkout via Payflex
+              </p>
             </div>
-
-            <button
-              onClick={handleAddToCart}
-              className={`w-full flex items-center justify-center gap-2 py-4 rounded-lg font-heading font-bold text-lg transition-all duration-300 ${
-                added
-                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                  : 'bg-brand-500 text-brand-900 hover:bg-brand-400 shadow-glow hover:shadow-glow-lg'
-              }`}
-            >
-              {added ? (
-                <>
-                  <Check size={22} />
-                  Added to Cart
-                </>
-              ) : (
-                <>
-                  <ShoppingCart size={22} />
-                  Add to Cart
-                </>
-              )}
-            </button>
-
-            <p className="text-brand-400 text-xs font-mono text-center mt-4">
-              Free delivery · Secure checkout via PayFast / Yoco
-            </p>
           </div>
         </div>
       </div>
