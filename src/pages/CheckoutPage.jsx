@@ -55,7 +55,7 @@ function CheckoutPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* ── Delivery Form ── */}
         <div>
-          <h2 className="font-heading font-semibold text-xl text-white mb-6">Delivery Information</h2>
+          <h2 className="font-heading font-semibold text-xl text-gray-900 mb-6">Delivery Information</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <input type="text" name="firstName" placeholder="First Name"
@@ -135,6 +135,7 @@ function CheckoutPage() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
