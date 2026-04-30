@@ -1375,5 +1375,74 @@ setTimeout(()=>document.querySelectorAll('.fade-up').forEach(el=>{
   if(r.top<window.innerHeight) el.classList.add('vis');
 }), 100);
 </script>
+
+<!-- ─── AUDIO PLAYER ─── -->
+<audio id="bgAudio" loop>
+  <source src="DigitalGrid.mp3" type="audio/mpeg">
+</audio>
+
+<style>
+  .audio-btn{
+    position:fixed;
+    bottom:1.5rem;
+    right:1.5rem;
+    z-index:9999;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(10,15,10,0.85);
+    backdrop-filter:blur(10px);
+    border:1.5px solid rgba(118,238,0,0.3);
+    color:#76EE00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all .25s ease;
+    font-size:1.1rem;
+    box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  }
+  .audio-btn:hover{
+    transform:scale(1.1);
+    border-color:#76EE00;
+    box-shadow:0 0 20px rgba(118,238,0,0.25);
+  }
+  .audio-btn.muted{opacity:0.6}
+  .audio-btn svg{width:22px;height:22px;fill:currentColor}
+</style>
+
+<button id="audioToggle" class="audio-btn muted" aria-label="Play music">
+  <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+<script>
+(function(){
+  const audio = document.getElementById('bgAudio');
+  const btn = document.getElementById('audioToggle');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
+  let playing = false;
+
+  function toggle(){
+    if(playing){
+      audio.pause();
+      playIcon.style.display='block';
+      pauseIcon.style.display='none';
+      btn.classList.add('muted');
+      btn.setAttribute('aria-label','Play music');
+    }else{
+      audio.play().catch(()=>{});
+      playIcon.style.display='none';
+      pauseIcon.style.display='block';
+      btn.classList.remove('muted');
+      btn.setAttribute('aria-label','Mute music');
+    }
+    playing = !playing;
+  }
+
+  btn.addEventListener('click', toggle);
+})();
+</script>
 </body>
 </html>
