@@ -1060,6 +1060,12 @@ const PRODUCTS = [
 let cart = [];
 let activeFilter = 'all';
 let _modalProductId = null;
+const _rafIds = [];
+const _intervalIds = [];
+function escapeHtml(str){
+  if(typeof str !== 'string') return String(str);
+  return str.replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
+}
 
 // ─── NODE MAP INFO ───
 const nodeInfo = [
@@ -1149,9 +1155,9 @@ function portalFlash(){
       ctx.lineWidth = 1;
       ctx.stroke();
     }
-    requestAnimationFrame(draw);
+    _rafIds.push(requestAnimationFrame(draw));
   }
-  draw();
+  _rafIds.push(requestAnimationFrame(draw));
 })();
 
 // ─── PARTICLE CANVAS (sim section) ───
@@ -1182,9 +1188,9 @@ function portalFlash(){
       ctx.fillStyle = `rgba(118,238,0,${p.life*.6})`;
       ctx.fill();
     });
-    requestAnimationFrame(draw);
+    _rafIds.push(requestAnimationFrame(draw));
   }
-  draw();
+  _rafIds.push(requestAnimationFrame(draw));
 })();
 
 // ─── PATHWAY CANVAS ───
@@ -1242,7 +1248,7 @@ function activateNode(i){
 }
 
 // Auto-cycle nodes
-const _nodeCycleInterval = setInterval(()=>{
+_intervalIds.push(setInterval(()=>{
   const next = (activeNodeId+1)%6;
   // Only if node map is visible
   const el = document.getElementById('pn0');
@@ -1250,7 +1256,7 @@ const _nodeCycleInterval = setInterval(()=>{
     const r = el.getBoundingClientRect();
     if(r.top < window.innerHeight && r.bottom > 0) activateNode(next);
   }
-}, 2800);
+}, 2800));
 
 // ─── PRODUCTS ───
 function conditionClass(c){
@@ -1263,18 +1269,18 @@ function renderProducts(filter){
   const grid = document.getElementById('productsGrid');
   const filtered = filter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
   grid.innerHTML = filtered.map(p=>`
-    <div class="product-card fade-up" onclick="openModal('${p.id}')">
+    <div class="product-card fade-up" onclick="openModal('${escapeHtml(p.id)}')">
       <div class="pc-img">
-        <span class="pc-badge ${conditionClass(p.condition)}">${p.condition}</span>
-        <span class="pc-type">${p.category==='laptop'?'💻':'🖥️'} ${p.category}</span>
-        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x220/f4f8f2/4caf00?text=${encodeURIComponent(p.name)}'"/>
+        <span class="pc-badge ${conditionClass(p.condition)}">${escapeHtml(p.condition)}</span>
+        <span class="pc-type">${p.category==='laptop'?'💻':'🖥️'} ${escapeHtml(p.category)}</span>
+        <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x220/f4f8f2/4caf00?text=${encodeURIComponent(p.name)}'"/>
       </div>
       <div class="pc-body">
-        <div class="pc-name">${p.name}</div>
-        <div class="pc-specs">${Object.entries(p.specs).map(([k,v])=>`<span class="spec-tag">${v}</span>`).join('')}</div>
+        <div class="pc-name">${escapeHtml(p.name)}</div>
+        <div class="pc-specs">${Object.entries(p.specs).map(([k,v])=>`<span class="spec-tag">${escapeHtml(v)}</span>`).join('')}</div>
         <div class="pc-footer">
           <span class="pc-price"><sub>R</sub>${p.price.toLocaleString()}</span>
-          <button class="pc-btn" id="btn-${p.id}" onclick="event.stopPropagation();addToCart('${p.id}')">Add to Cart</button>
+          <button class="pc-btn" id="btn-${escapeHtml(p.id)}" onclick="event.stopPropagation();addToCart('${escapeHtml(p.id)}')">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -1332,17 +1338,17 @@ function updateCartUI(){
   } else {
     items.innerHTML = cart.map(item=>`
       <div class="cart-item">
-        <div class="cart-item-img"><img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x50/f4f8f2/4caf00'"/></div>
+        <div class="cart-item-img"><img src="${escapeHtml(item.img)}" alt="${escapeHtml(item.name)}" onerror="this.src='https://via.placeholder.com/60x50/f4f8f2/4caf00'"/></div>
         <div style="flex:1">
-          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-name">${escapeHtml(item.name)}</div>
           <div class="cart-item-price">R${item.price.toLocaleString()}</div>
           <div class="cart-item-qty">
-            <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+            <button class="qty-btn" onclick="changeQty('${escapeHtml(item.id)}',-1)">−</button>
             <span style="font-size:.82rem;font-weight:600;min-width:1.2rem;text-align:center">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+            <button class="qty-btn" onclick="changeQty('${escapeHtml(item.id)}',1)">+</button>
           </div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑️</button>
+        <button class="cart-item-remove" onclick="removeFromCart('${escapeHtml(item.id)}')">🗑️</button>
       </div>
     `).join('');
     footer.style.display='block';
@@ -1376,10 +1382,10 @@ function openDetail(id){
   document.getElementById('detailPrice').textContent = 'R'+p.price.toLocaleString();
   document.getElementById('detailDesc').textContent = p.desc;
   document.getElementById('detailSpecs').innerHTML = Object.entries(p.specs).map(([k,v])=>`
-    <div class="detail-spec"><div class="dk">${k}</div><div class="dv">${v}</div></div>
+    <div class="detail-spec"><div class="dk">${escapeHtml(k)}</div><div class="dv">${escapeHtml(v)}</div></div>
   `).join('');
   const uses = USE_CASES[p.category] || USE_CASES['laptop'];
-  document.getElementById('detailUses').innerHTML = uses.map(u=>`<span class="use-tag">${u}</span>`).join('');
+  document.getElementById('detailUses').innerHTML = uses.map(u=>`<span class="use-tag">${escapeHtml(u)}</span>`).join('');
   document.getElementById('detailAddBtn').onclick = ()=>{addToCart(id);closeDetail()};
   document.getElementById('detailOverlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -1416,7 +1422,7 @@ function openModal(id){
   document.getElementById('modalPrice').textContent = 'R'+p.price.toLocaleString();
   document.getElementById('modalDesc').textContent = p.desc;
   document.getElementById('modalSpecs').innerHTML = Object.entries(p.specs).map(([k,v])=>`
-    <div class="modal-spec"><div class="ms-k">${k}</div><div class="ms-v">${v}</div></div>
+    <div class="modal-spec"><div class="ms-k">${escapeHtml(k)}</div><div class="ms-v">${escapeHtml(v)}</div></div>
   `).join('');
   const addBtn = document.getElementById('modalAddBtn');
   addBtn.onclick = ()=>{addToCart(id);closeModal()};
@@ -1484,6 +1490,10 @@ const observer = new IntersectionObserver((entries)=>{
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
 // ─── INIT ───
+window.addEventListener('beforeunload',()=>{
+  _rafIds.forEach(id=>cancelAnimationFrame(id));
+  _intervalIds.forEach(id=>clearInterval(id));
+});
 renderProducts('all');
 updateCartUI();
 setTimeout(()=>document.querySelectorAll('.fade-up').forEach(el=>{

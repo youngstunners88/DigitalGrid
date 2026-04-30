@@ -28,3 +28,6 @@ build/
 # Security runtime
 .prismor-warden/
 sessions/
+
+# Local Netlify folder
+.netlify
