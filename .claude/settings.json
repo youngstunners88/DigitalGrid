@@ -1,0 +1,67 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/kofibeatz/.prismor/warden/cloaking/hooks/userprompt-guard.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Read|Edit|MultiEdit|Write|WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/kofibeatz/.prismor/warden/cloaking/hooks/decloak.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Read|Edit|MultiEdit|Write|WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/kofibeatz/.prismor/warden/cloaking/hooks/recloak-mcp.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "PRISMOR_WARDEN_WORKSPACE": "/home/kofibeatz/DigitalGrid",
+    "PRISMOR_SECRETS_DIR": "/home/kofibeatz/.prismor/secrets"
+  }
+}
