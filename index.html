@@ -396,7 +396,35 @@
 
     /* ─── NUMBER COUNTER ANIMATION ─── */
     .count-up{display:inline-block}
-  </style>
+  
+    /* ─── PRODUCT DETAIL VIEW ─── */
+    .detail-overlay{position:fixed;inset:0;z-index:750;background:rgba(0,0,0,.5);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .35s;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+    .detail-overlay.open{opacity:1;pointer-events:all}
+    .detail-panel{background:#fff;border-radius:28px;max-width:900px;width:100%;max-height:92vh;overflow-y:auto;position:relative;transform:translateY(30px) scale(.97);transition:all .4s;box-shadow:0 50px 140px rgba(0,0,0,.25),0 8px 40px rgba(76,175,0,.12)}
+    .detail-overlay.open .detail-panel{transform:translateY(0) scale(1)}
+    .detail-close{position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.15);z-index:10}
+    .detail-close:hover{background:#fff;transform:rotate(90deg)}
+    .detail-hero{height:320px;background:var(--off-white);position:relative;overflow:hidden;border-radius:28px 28px 0 0;cursor:pointer}
+    .detail-hero img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .detail-hero:hover img{transform:scale(1.03)}
+    .detail-gallery{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:.6rem;background:var(--off-white)}
+    .detail-gallery img{width:100%;height:160px;object-fit:cover;border-radius:14px;cursor:pointer;transition:transform .3s,box-shadow .3s}
+    .detail-gallery img:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .detail-body{padding:2rem 2.5rem 2.5rem}
+    .detail-title{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--dark);margin-bottom:.4rem}
+    .detail-price{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:800;color:var(--green);margin-bottom:1.2rem}
+    .detail-section{margin-bottom:1.5rem}
+    .detail-section h4{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:.6rem}
+    .detail-specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+    .detail-spec{background:var(--off-white);border-radius:10px;padding:.7rem 1rem;border:1px solid rgba(76,175,0,.08)}
+    .detail-spec .dk{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:.15rem}
+    .detail-spec .dv{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--dark);font-weight:600}
+    .detail-uses{display:flex;flex-wrap:wrap;gap:.4rem}
+    .use-tag{background:rgba(76,175,0,.08);border:1px solid rgba(76,175,0,.15);color:var(--dark);padding:.35rem .85rem;border-radius:999px;font-size:.72rem;font-weight:600}
+    .detail-desc{color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:1.5rem}
+    .detail-btns{display:flex;gap:.8rem}
+    @media(max-width:640px){.detail-gallery{grid-template-columns:1fr}.detail-specs-grid{grid-template-columns:1fr}.detail-body{padding:1.5rem}}
+</style>
 </head>
 <body>
 
@@ -908,7 +936,7 @@
 ════════════════════════════════════ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
   <div class="modal" id="modal">
-    <div class="modal-img"><img id="modalImg" src="" alt=""/></div>
+    <div class="modal-img" style="cursor:pointer" onclick="openDetailFromModal()" title="Click to see more views"><img id="modalImg" src="" alt=""/></div>
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-body">
       <span class="modal-badge" id="modalBadge"></span>
@@ -921,6 +949,37 @@
           Add to Cart <div class="arrow">→</div>
         </button>
         <button class="btn-outline" onclick="closeModal()" style="flex:0 0 auto;padding:.9rem 1.5rem">✕ Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PRODUCT DETAIL VIEW
+════════════════════════════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetailOnBg(event)">
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" onclick="closeDetail()">✕</button>
+    <div class="detail-hero" id="detailHero"><img id="detailHeroImg" src="" alt=""/></div>
+    <div class="detail-gallery">
+      <img id="detailAngle" src="" alt="Angle view" onclick="swapDetailImage(this)"/>
+      <img id="detailSide" src="" alt="Side view" onclick="swapDetailImage(this)"/>
+    </div>
+    <div class="detail-body">
+      <div class="detail-title" id="detailTitle"></div>
+      <div class="detail-price" id="detailPrice"></div>
+      <div class="detail-desc" id="detailDesc"></div>
+      <div class="detail-section">
+        <h4>Specifications</h4>
+        <div class="detail-specs-grid" id="detailSpecs"></div>
+      </div>
+      <div class="detail-section">
+        <h4>Ideal For</h4>
+        <div class="detail-uses" id="detailUses"></div>
+      </div>
+      <div class="detail-btns">
+        <button class="btn-primary" id="detailAddBtn" style="flex:1;justify-content:center">Add to Cart <div class="arrow">→</div></button>
+        <button class="btn-outline" onclick="closeDetail()" style="flex:0 0 auto;padding:.9rem 1.5rem">✕ Close</button>
       </div>
     </div>
   </div>
@@ -1293,6 +1352,53 @@ function checkoutCart(){
 }
 
 // ─── MODAL ───
+// ─── PRODUCT DETAIL VIEW ───
+const USE_CASES = {
+  'laptop': ['Remote Work','Students','Business Travel','Content Creation','Programming','Office Productivity','Light Gaming','Daily Commute'],
+  'desktop': ['Home Office','Small Business','Call Centers','School Labs','Server Closet','Point of Sale','Media Center','CAD Workstation']
+};
+
+function openDetail(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const folder = p.img.replace('product-images/','').replace('/front.jpg','');
+  document.getElementById('detailHeroImg').src = p.img;
+  document.getElementById('detailAngle').src = 'product-images/'+folder+'/angle.jpg';
+  document.getElementById('detailSide').src = 'product-images/'+folder+'/side.jpg';
+  document.getElementById('detailTitle').textContent = p.name;
+  document.getElementById('detailPrice').textContent = 'R'+p.price.toLocaleString();
+  document.getElementById('detailDesc').textContent = p.desc;
+  document.getElementById('detailSpecs').innerHTML = Object.entries(p.specs).map(([k,v])=>`
+    <div class="detail-spec"><div class="dk">${k}</div><div class="dv">${v}</div></div>
+  `).join('');
+  const uses = USE_CASES[p.category] || USE_CASES['laptop'];
+  document.getElementById('detailUses').innerHTML = uses.map(u=>`<span class="use-tag">${u}</span>`).join('');
+  document.getElementById('detailAddBtn').onclick = ()=>{addToCart(id);closeDetail()};
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeDetail(){
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function closeDetailOnBg(e){
+  if(e.target===document.getElementById('detailOverlay')) closeDetail();
+}
+
+function swapDetailImage(el){
+  const hero = document.getElementById('detailHeroImg');
+  const temp = hero.src;
+  hero.src = el.src;
+  el.src = temp;
+}
+
+function openDetailFromModal(){
+  const id = window._modalProductId;
+  if(id){ closeModal(); setTimeout(()=>openDetail(id), 300); }
+}
+
 function openModal(id){
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p) return;
@@ -1307,6 +1413,7 @@ function openModal(id){
   `).join('');
   const addBtn = document.getElementById('modalAddBtn');
   addBtn.onclick = ()=>{addToCart(id);closeModal()};
+  window._modalProductId = id;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
   portalFlash();
