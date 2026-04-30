@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Digital Grid — Premium Refurbished Computers South Africa</title>
   <meta name="description" content="Premium refurbished laptops and desktops. Tested, certified, and ready to deliver across South Africa."/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:;"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta http-equiv="X-Content-Type-Options" content="nosniff"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -841,16 +845,16 @@
           <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:1.5rem;color:var(--dark)">Send an Enquiry</h3>
           <div class="form-field">
             <label>Your Name</label>
-            <input type="text" id="cName" placeholder="Full name"/>
+            <input type="text" id="cName" placeholder="Full name" autocomplete="name" aria-label="Your Name" required maxlength="100"/>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
             <div class="form-field">
               <label>Email</label>
-              <input type="email" id="cEmail" placeholder="email@example.com"/>
+              <input type="email" id="cEmail" placeholder="email@example.com" autocomplete="email" aria-label="Email Address" required maxlength="100"/>
             </div>
             <div class="form-field">
               <label>Budget</label>
-              <select id="cBudget">
+              <select id="cBudget" aria-label="Budget Range">
                 <option value="">Select range</option>
                 <option>Under R2,000</option>
                 <option>R2,000 – R4,000</option>
@@ -862,7 +866,7 @@
           </div>
           <div class="form-field">
             <label>Message</label>
-            <textarea id="cMsg" placeholder="Tell us what you're looking for..."></textarea>
+            <textarea id="cMsg" placeholder="Tell us what you're looking for..." autocomplete="off" aria-label="Message" required maxlength="2000"></textarea>
           </div>
           <button class="form-submit" onclick="submitContact()">Send Message →</button>
         </div>
@@ -1055,6 +1059,7 @@ const PRODUCTS = [
 
 let cart = [];
 let activeFilter = 'all';
+let _modalProductId = null;
 
 // ─── NODE MAP INFO ───
 const nodeInfo = [
@@ -1075,7 +1080,7 @@ document.querySelectorAll('button,a,.product-card,.why-card,.testi-card,.sat-car
   el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover')});
   el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover')});
 });
-if('ontouchstart' in window){cur.style.display='none';ring.style.display='none'}
+if('ontouchstart' in window || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)){cur.style.display='none';ring.style.display='none'}
 
 // ─── NAV ───
 const nav = document.getElementById('mainNav');
@@ -1095,6 +1100,7 @@ function portalFlash(){
 
 // ─── HERO TUNNEL CANVAS ───
 (function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const c = document.getElementById('tunnel-canvas');
   if(!c) return;
   const ctx = c.getContext('2d');
@@ -1150,6 +1156,7 @@ function portalFlash(){
 
 // ─── PARTICLE CANVAS (sim section) ───
 (function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const c = document.getElementById('particleCanvas');
   if(!c) return;
   const ctx = c.getContext('2d');
@@ -1235,7 +1242,7 @@ function activateNode(i){
 }
 
 // Auto-cycle nodes
-setInterval(()=>{
+const _nodeCycleInterval = setInterval(()=>{
   const next = (activeNodeId+1)%6;
   // Only if node map is visible
   const el = document.getElementById('pn0');
@@ -1395,7 +1402,7 @@ function swapDetailImage(el){
 }
 
 function openDetailFromModal(){
-  const id = window._modalProductId;
+  const id = _modalProductId;
   if(id){ closeModal(); setTimeout(()=>openDetail(id), 300); }
 }
 
@@ -1413,7 +1420,7 @@ function openModal(id){
   `).join('');
   const addBtn = document.getElementById('modalAddBtn');
   addBtn.onclick = ()=>{addToCart(id);closeModal()};
-  window._modalProductId = id;
+  _modalProductId = id;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
   portalFlash();
@@ -1443,6 +1450,8 @@ function submitContact(){
   const budget = document.getElementById('cBudget').value;
   const msg = document.getElementById('cMsg').value.trim();
   if(!name || !email || !msg){ showToast('⚠️ Please fill in all fields'); return; }
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRe.test(email)){ showToast('⚠️ Please enter a valid email address'); return; }
   const body = `Name: ${name}\nEmail: ${email}\nBudget: ${budget||'Not specified'}\n\nMessage:\n${msg}`;
   window.location.href = `mailto:info@thedigitalgrid.co.za?subject=${encodeURIComponent('Device Enquiry from '+name)}&body=${encodeURIComponent(body)}`;
   showToast('✅ Opening your email client...');
