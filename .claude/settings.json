@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/01-Projects/active/digit-grid\" --mode enforce"
           }
         ]
       },
@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/01-Projects/active/digit-grid\" --mode enforce"
           }
         ]
       },
@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/DigitalGrid\" --mode enforce"
+            "command": "python3 \"/home/kofibeatz/.prismor/warden/cli.py\" hook-dispatch --agent claude --workspace \"/home/kofibeatz/01-Projects/active/digit-grid\" --mode enforce"
           }
         ]
       },
@@ -61,7 +61,7 @@
     ]
   },
   "env": {
-    "PRISMOR_WARDEN_WORKSPACE": "/home/kofibeatz/DigitalGrid",
+    "PRISMOR_WARDEN_WORKSPACE": "/home/kofibeatz/01-Projects/active/digit-grid",
     "PRISMOR_SECRETS_DIR": "/home/kofibeatz/.prismor/secrets"
   }
 }
